@@ -22,7 +22,9 @@ npm run lint
 quasar build
 ```
 
-### Added by the project (see more on the 'Customize the configuration' section)
+## Added by the project (see more on the 'Customize the configuration' section)
+
+## environment
 ```
 quasar ext add @quasar/dotenv
 
