@@ -43,6 +43,15 @@ npm i @okta/okta-vue@2.0.0
 
 ### config for Heroku
 
+Need to add "express": "^4.17.1", deplying spa
+See https://quasar.dev/quasar-cli/developing-spa/deploying#General-deployment
+```
+npm install express --save connect-history-api-fallback
+# test later with
+node server.js
+
+```
+
 Need a server.js file
 ```
 const
@@ -58,7 +67,6 @@ app.use(serveStatic(__dirname + '/dist/spa'))
 //app.listen(port)
 app.listen(port, () => console.log(`Server is listening on port ${port}...`));
 ```
-
 package.json add section, build, start, heroku-postbuild
 ```
 "scripts": {
@@ -240,6 +248,7 @@ heroku logs --tail --app <not needed when current>
 ```
 
 https://dashboard.heroku.com/apps/desolate-temple-13672/activity/builds/faf99ec4-6e87-4297-9422-4d3d1e91e8bc
+https://quasar.dev/quasar-cli/developing-spa/deploying#General-deployment
 
 ## Config notes using quasar
 
