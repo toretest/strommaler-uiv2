@@ -22,6 +22,53 @@ npm run lint
 quasar build
 ```
 
+### Added by the project (see more on the 'Customize the configuration' section)
+```
+quasar ext add @quasar/dotenv
+
+# .spesfiy just .dev for test and prod.
+# Example .dev
+ISSUER=https://XXXXXXX.okta.com/oauth2/default
+CLIENT_ID=YYYYYYYY
+OKTA_TESTING_DISABLEHTTPSCHECK=false
+```
+
+### Add okta
+```
+npm i @okta/okta-vue@2.0.0
+
+# NOT THIS when no typescript : npm i @okta/okta-vue@2.0.0 @types/okta__okta-vue@1.2.0
+# For boot add 'oktaStartup' in section in quasar.config. Se later
+```
+
+### config for Heroku
+
+Need a server.js file
+```
+const
+  express = require('express'),
+  serveStatic = require('serve-static'),
+  history = require('connect-history-api-fallback'),
+  port = process.env.PORT || 80
+
+const app = express()
+
+app.use(history())
+app.use(serveStatic(__dirname + '/dist/spa'))
+//app.listen(port)
+app.listen(port, () => console.log(`Server is listening on port ${port}...`));
+```
+
+package.json add section, build, start, heroku-postbuild
+```
+"scripts": {
+   .
+   .
+    "build": "quasar build",
+    "start": "node server.js",
+    "heroku-postbuild": "npm install && quasar build"
+```
+
 # Customize the configuration
 See [Configuring quasar.conf.js](https://quasar.dev/quasar-cli/quasar-conf-js).
 
@@ -55,6 +102,9 @@ Example file content
 MY_DOTENV_TEST="This should work!"
 ```
 
+```
+quasar new boot oktaStartup.js
+```
 
 
 # Okta
