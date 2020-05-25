@@ -44,7 +44,11 @@ npm i @okta/okta-vue@2.0.0
 ### config for Heroku
 
 Need to add "express": "^4.17.1", deplying spa
-See https://quasar.dev/quasar-cli/developing-spa/deploying#General-deployment
+See
+https://quasar.dev/quasar-cli/developing-spa/deploying#General-deployment
+https://www.npmjs.com/package/connect-history-api-fallback
+https://expressjs.com/en/starter/installing.html
+
 ```
 npm install express --save connect-history-api-fallback
 # test later with
@@ -267,7 +271,8 @@ This give use new lines in package.json:
 
 ```
 
-2. heroku-run-build-script, see **build**, **start** and **heroku-postbuild**
+2. package.json: heroku-run-build-script, see **build**, **start** and **heroku-postbuild**
+Get error "Cannot GET /" without
 ```
 "scripts": {
     "lint": "eslint --ext .js,.ts,.vue --ignore-path .gitignore ./",
