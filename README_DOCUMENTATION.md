@@ -43,6 +43,8 @@ If you specified a common root object, say MyData, then the data will be placed 
 .dev.production
 ```
 add .gitignore
+
+#NB! under install, you can decide this
 ```
 .env.development
 .env.production
@@ -53,6 +55,8 @@ Example file content
 MY_DOTENV_TEST="This should work!"
 ```
 
+
+
 # Okta
 
 ## Viktig
@@ -62,9 +66,54 @@ MY_DOTENV_TEST="This should work!"
 - 0https://jwt.io/
 - https://oidcdebugger.com/
 
-
+### add okta plugin
 ```
 npm i @okta/okta-vue@2.0.0 @types/okta__okta-vue@1.2.0
+
+# NOT THIS when no typescript : npm i @okta/okta-vue@2.0.0 @types/okta__okta-vue@1.2.0
+```
+
+### Added src/boot/oktaStartup.js
+https://quasar.dev/quasar-cli/cli-documentation/boot-files#Anatomy-of-a-boot-file
+```
+quasar new boot oktaStartup.js
+```
+
+Add content
+```
+import Auth from '@okta/okta-vue'
+
+// "async" is optional;
+// more info on params: https://quasar.dev/quasar-cli/cli-documentation/boot-files#Anatomy-of-a-boot-file
+// export default async (/* { app, router, Vue ... } */) => {
+
+export default async ({ app, router, Vue, urlPath, redirect }) => {
+  // something to do
+  Vue.use(Auth, {
+    issuer: 'https://dev-207979.okta.com/oauth2/default',
+    clientId: '0oaaoxkde6Rv10fXu4x6',
+    redirectUri: window.location.origin + '/implicit/callback',
+    scopes: ['openid', 'profile', 'email'],
+    pkce: true
+  })
+  console.log('********* process env:' + Vue.prototype.$auth.getAccessToken())
+  await router.beforeEach(Vue.prototype.$auth.authRedirectGuard())
+}
+```
+
+### add 'oktaStartup' in section in quasar.config
+```
+module.exports = configure(function (ctx) {
+  return {
+    // app boot file (/src/boot)
+    // --> boot files are part of "main.js"
+    // https://quasar.dev/quasar-cli/cli-documentation/boot-files
+    boot: [
+      'composition-api',
+      'i18n',
+      'axios',
+      'oktaStartup'
+    ],
 ```
 
 **@okta/okta-vue 2.0.0**
