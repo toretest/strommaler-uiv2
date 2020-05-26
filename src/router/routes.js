@@ -7,7 +7,21 @@ const routes = [
     children: [
       {
         path: '',
-        component: () => import('pages/PageTodo.vue')
+        component: () => import('pages/PageTodo.vue'),
+        meta: {
+          requiresAuth: false
+        }
+      },
+      {
+        path: 'auth',
+        component: () => import('pages/PageAuth.vue'),
+        meta: {
+          requiresAuth: true
+        }
+      },
+      {
+        path: '/settings',
+        component: () => import('pages/PageSettings.vue')
       },
       {
         path: '/implicit/callback', component: Auth.handleCallback()

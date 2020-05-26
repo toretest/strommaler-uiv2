@@ -76,7 +76,7 @@ export default {
         {
           title: 'Todo',
           icon: 'list',
-          to: '/todo'
+          to: '/'
         },
         {
           title: 'Settings',
