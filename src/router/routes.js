@@ -6,22 +6,25 @@ const routes = [
     component: () => import('layouts/MainLayout.vue'),
     children: [
       {
-        path: '',
-        component: () => import('pages/PageTodo.vue'),
+        path: '/home',
+        component: () => import('pages/PageHome.vue'),
         meta: {
           requiresAuth: false
         }
       },
       {
-        path: 'auth',
-        component: () => import('pages/PageAuth.vue'),
+        path: 'todo',
+        component: () => import('pages/PageTodo.vue'),
         meta: {
           requiresAuth: true
         }
       },
       {
         path: '/settings',
-        component: () => import('pages/PageSettings.vue')
+        component: () => import('pages/PageSettings.vue'),
+        meta: {
+          requiresAuth: true
+        }
       },
       {
         path: '/implicit/callback', component: Auth.handleCallback()

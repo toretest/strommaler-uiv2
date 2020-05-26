@@ -8,6 +8,7 @@ export default async ({ router, Vue }) => {
     scopes: ['openid', 'profile', 'email'],
     pkce: true
   })
+  console.log('SSSSSSSSS' + window.location.origin + '/implicit/callback')
   console.log('********* process env:' + await Vue.prototype.$auth.getAccessToken())
   await router.beforeEach(Vue.prototype.$auth.authRedirectGuard())
 }

@@ -1,6 +1,6 @@
 <template>
   <q-page>
-    <p>Auth Page</p>
+    <p>Login</p>
   </q-page>
 
 </template>

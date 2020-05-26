@@ -6,10 +6,19 @@
           Strøm og pris app
         </q-toolbar-title>
         <q-btn
-          to="/auth"
+          v-on:click="login()"
+          v-show="!authenticated"
           flat
           icon-right="account_circle"
-          label="Account"
+          label="Login"
+          class="absolute-right"
+        />
+         <q-btn
+          v-on:click="logout()"
+          v-show="authenticated"
+          flat
+          icon-right="account_circle"
+          label="Logout"
           class="absolute-right"
         />
         <!--        <div>Quasar v{{ $q.version }}</div>-->
@@ -59,24 +68,45 @@ import EssentialLink from 'components/EssentialLink'
 
 export default {
   name: 'MainLayout',
-
+  created () {
+    this.isAuthenticated()
+  },
+  watch: {
+    // Everytime the route changes, check for auth status
+    $route: 'isAuthenticated'
+  },
   components: {
     EssentialLink
   },
-
+  methods: {
+    async isAuthenticated () {
+      this.authenticated = await this.$auth.isAuthenticated()
+    },
+    async logout () {
+      await this.$auth.logout()
+      await this.isAuthenticated()
+      await this.$router.push({ path: '/home' })
+    },
+    async login () {
+      console.log('login......')
+      await this.$auth.login()
+      await this.isAuthenticated()
+    }
+  },
   data () {
     return {
+      authenticated: false,
       leftDrawerOpen: false,
       essentialLinks: [
         {
-          title: 'Login',
-          icon: 'account_circle',
-          to: '/auth'
+          title: 'Home',
+          icon: 'home',
+          to: '/home'
         },
         {
           title: 'Todo',
           icon: 'list',
-          to: '/'
+          to: '/todo'
         },
         {
           title: 'Settings',
