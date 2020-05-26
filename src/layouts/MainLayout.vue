@@ -1,36 +1,44 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout view="hHh lpR fFf">
     <q-header elevated>
       <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="leftDrawerOpen = !leftDrawerOpen"
-        />
-
-        <q-toolbar-title>
-          Quasar App
+        <q-toolbar-title >
+          Strøm og pris app
         </q-toolbar-title>
-
-        <div>Quasar v{{ $q.version }}</div>
+        <q-btn
+          to="/auth"
+          flat
+          icon-right="account_circle"
+          label="Account"
+          class="absolute-right"
+        />
+        <!--        <div>Quasar v{{ $q.version }}</div>-->
       </q-toolbar>
     </q-header>
 
+    <q-footer elevated>
+      <q-tabs>
+        <q-route-tab v-for="link in essentialLinks"
+                     :key="link.title"
+                     :icon="link.icon"
+                     :label="link.title"
+                     :to="link.to"/>
+      </q-tabs>
+    </q-footer>
+
     <q-drawer
+      :width="160"
       v-model="leftDrawerOpen"
+      :breakpoint="767"
       show-if-above
       bordered
-      content-class="bg-grey-1"
+      content-class="bg-primary"
     >
-      <q-list>
+      <q-list class="dark">
         <q-item-label
           header
-          class="text-grey-8"
-        >
-          Essential Links
+          class="text-grey-4"
+        >Navigation
         </q-item-label>
         <EssentialLink
           v-for="link in essentialLinks"
@@ -41,7 +49,7 @@
     </q-drawer>
 
     <q-page-container>
-      <router-view />
+      <router-view/>
     </q-page-container>
   </q-layout>
 </template>
@@ -61,49 +69,31 @@ export default {
       leftDrawerOpen: false,
       essentialLinks: [
         {
-          title: 'Docs',
-          caption: 'quasar.dev',
-          icon: 'school',
-          link: 'https://quasar.dev'
+          title: 'Login',
+          icon: 'account_circle',
+          to: '/auth'
         },
         {
-          title: 'Github',
-          caption: 'github.com/quasarframework',
-          icon: 'code',
-          link: 'https://github.com/quasarframework'
+          title: 'Todo',
+          icon: 'list',
+          to: '/todo'
         },
         {
-          title: 'Discord Chat Channel',
-          caption: 'chat.quasar.dev',
-          icon: 'chat',
-          link: 'https://chat.quasar.dev'
-        },
-        {
-          title: 'Forum',
-          caption: 'forum.quasar.dev',
-          icon: 'record_voice_over',
-          link: 'https://forum.quasar.dev'
-        },
-        {
-          title: 'Twitter',
-          caption: '@quasarframework',
-          icon: 'rss_feed',
-          link: 'https://twitter.quasar.dev'
-        },
-        {
-          title: 'Facebook',
-          caption: '@QuasarFramework',
-          icon: 'public',
-          link: 'https://facebook.quasar.dev'
-        },
-        {
-          title: 'Quasar Awesome',
-          caption: 'Community Quasar projects',
-          icon: 'favorite',
-          link: 'https://awesome.quasar.dev'
+          title: 'Settings',
+          icon: 'settings',
+          to: '/settings'
         }
+
       ]
     }
   }
 }
 </script>
+
+<style>
+  @media screen and (min-width: 768px) {
+    .q-footer {
+      display: none;
+    }
+  }
+</style>

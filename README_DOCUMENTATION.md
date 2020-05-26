@@ -24,7 +24,11 @@ quasar build
 
 ## Added by the project (see more on the 'Customize the configuration' section)
 
-## environment
+### Quasar.config.js:  set to history from hash, remove #
+ build: {
+      vueRouterMode: 'history', // available values: 'hash', 'history'
+
+### environment
 ```
 quasar ext add @quasar/dotenv
 
@@ -41,6 +45,20 @@ npm i @okta/okta-vue@2.0.0
 
 # NOT THIS when no typescript : npm i @okta/okta-vue@2.0.0 @types/okta__okta-vue@1.2.0
 # For boot add 'oktaStartup' in section in quasar.config. Se later
+```
+
+boot script okta
+```
+quasar new boot oktaStartup.js
+```
+Add 'oktaStartup' this to quasar.conf.js like this
+```
+ boot: [
+      'composition-api',
+      'i18n',
+      'axios',
+      'oktaStartup'
+    ],
 ```
 
 ### config for Heroku

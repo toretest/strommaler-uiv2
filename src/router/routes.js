@@ -1,10 +1,16 @@
+import Auth from '@okta/okta-vue'
 
 const routes = [
   {
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/Index.vue') }
+      {
+        path: '', component: () => import('pages/Index.vue')
+      },
+      {
+        path: '/implicit/callback', component: Auth.handleCallback()
+      }
     ]
   }
 ]
