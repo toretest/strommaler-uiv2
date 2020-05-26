@@ -6,7 +6,8 @@ const routes = [
     component: () => import('layouts/MainLayout.vue'),
     children: [
       {
-        path: '', component: () => import('pages/Index.vue')
+        path: '',
+        component: () => import('pages/PageTodo.vue')
       },
       {
         path: '/implicit/callback', component: Auth.handleCallback()

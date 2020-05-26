@@ -15,8 +15,7 @@ module.exports = function (/* ctx */) {
     boot: [
 
       'i18n',
-      'axios'
-      ,
+      'axios',
       'oktaStartup'
     ],
 
@@ -84,12 +83,14 @@ module.exports = function (/* ctx */) {
 
       // https://quasar.dev/quasar-cli/cli-documentation/handling-webpack
       extendWebpack (cfg) {
+        /* es lint is a bad product because it does not work i practice
         cfg.module.rules.push({
           enforce: 'pre',
           test: /\.(js|vue)$/,
           loader: 'eslint-loader',
           exclude: /node_modules/
         })
+        */
       }
     },
 
